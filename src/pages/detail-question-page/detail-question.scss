@@ -1,0 +1,35 @@
+.wrapper-detail-question {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+
+  .wrapper-options {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+
+    .style-option {
+      border: 1px solid black;
+      border-radius: 5px;
+      min-width: 450px;
+      .text-option {
+        padding: 10px;
+        text-align: center;
+      }
+
+      .infor-option {
+        padding: 2px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        border-top: 1px solid black;
+        align-items: center;
+      }
+    }
+
+    .chose {
+      background-color: lightgreen;
+    }
+  }
+}

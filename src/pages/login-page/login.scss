@@ -1,0 +1,16 @@
+.wrapper-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  padding: 30px;
+
+  .header {
+    font-size: 32px;
+    font-weight: bold;
+  }
+
+  .form {
+    width: 100%;
+  }
+}

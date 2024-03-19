@@ -1,0 +1,12 @@
+body {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: bold;
+}
