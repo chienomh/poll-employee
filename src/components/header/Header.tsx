@@ -1,5 +1,4 @@
-import { Container } from "@mui/material";
-import { Button, Image, Nav } from "react-bootstrap";
+import { Button, Container, Image, Nav } from "react-bootstrap";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { getCurrentUser } from "../../pages/login-page/selector";
 import { useAppSelector } from "../../store";
