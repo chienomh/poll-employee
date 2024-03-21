@@ -26,7 +26,10 @@ export const loginSlice = createSlice({
     ) => {
       state.users = action.payload;
     },
-    setCurrentUser: (state: ILoginIitial, action: PayloadAction<IUser>) => {
+    setCurrentUser: (
+      state: ILoginIitial,
+      action: PayloadAction<IUser | undefined>
+    ) => {
       state.currentUser = action.payload;
     },
   },

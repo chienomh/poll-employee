@@ -2,6 +2,8 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import loginReducer from "../pages/login-page/slice";
 import homeReducer from "../pages/home-page/slice";
 import detailQuestionReducer from "../pages/detail-question-page/slice";
+import newQuestionReducer from "../pages/new-question-page/slice";
+
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 export const store = configureStore({
@@ -9,6 +11,7 @@ export const store = configureStore({
     login: loginReducer,
     home: homeReducer,
     detailQuestion: detailQuestionReducer,
+    newQuestion: newQuestionReducer,
   },
 });
 
@@ -16,6 +19,7 @@ const rootReducer = combineReducers({
   login: loginReducer,
   home: homeReducer,
   detailQuestion: detailQuestionReducer,
+  newQuestion: newQuestionReducer,
 });
 
 export const setupStore = (preloadedState?: Partial<RootState>) => {

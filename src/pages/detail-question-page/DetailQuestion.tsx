@@ -34,8 +34,10 @@ export default function DetailQuestion() {
   }, [currentUser, currentQuestion]);
 
   useEffect(() => {
-    if (question_id && listQuestion) {
+    if (question_id && listQuestion && question_id in listQuestion) {
       setCurrentQuestion(listQuestion[question_id]);
+    } else {
+      navigate("/error");
     }
 
     if (listUser) {

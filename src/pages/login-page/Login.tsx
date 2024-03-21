@@ -37,11 +37,12 @@ export default function Login() {
         }
       }
     }
-    navigate("/");
+    navigate(-1);
   };
 
   useEffect(() => {
     dispatch(fetchAllUsers());
+    dispatch(setCurrentUser(undefined));
   }, []);
   return (
     <Container>

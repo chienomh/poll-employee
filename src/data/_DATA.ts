@@ -1,4 +1,5 @@
 import {
+  IQuestion,
   IQuestions,
   ISaveQuestionReq,
 } from "../components/list-questions/list-question.model";
@@ -147,10 +148,9 @@ function generateUID() {
 }
 
 export function _getUsers() {
-  const data = new Promise<IUsers>((resolve) => {
+  return new Promise<IUsers>((resolve) => {
     setTimeout(() => resolve({ ...users }), 1000);
   });
-  return data;
 }
 
 export function _getQuestions() {
@@ -160,7 +160,7 @@ export function _getQuestions() {
 }
 
 function formatQuestion({ optionOneText, optionTwoText, author }: any) {
-  return {
+  const data: IQuestion = {
     id: generateUID(),
     timestamp: Date.now(),
     author,
@@ -173,10 +173,11 @@ function formatQuestion({ optionOneText, optionTwoText, author }: any) {
       text: optionTwoText,
     },
   };
+  return data;
 }
 
 export function _saveQuestion(question: ISaveQuestionReq) {
-  return new Promise((resolve, reject) => {
+  return new Promise<IQuestion>((resolve, reject) => {
     if (
       !question.optionOneText ||
       !question.optionTwoText ||
@@ -191,7 +192,18 @@ export function _saveQuestion(question: ISaveQuestionReq) {
         ...questions,
         [formattedQuestion.id]: formattedQuestion,
       };
-
+      if (question.author) {
+        users = {
+          ...users,
+          [question.author]: {
+            ...users[question.author],
+            questions: [
+              ...users[question.author].questions,
+              formattedQuestion.id,
+            ],
+          },
+        };
+      }
       resolve(formattedQuestion);
     }, 1000);
   });

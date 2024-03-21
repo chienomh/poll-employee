@@ -1,17 +1,18 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import ListQuestion from "../../components/list-questions/ListQuestion";
 import { IQuestions } from "../../components/list-questions/list-question.model";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { getCurrentUser } from "../login-page/selector";
-import { fetchAllUsers } from "../login-page/slice";
 import "./home.scss";
 import { getAllQuestion } from "./selector";
 import { fetchAllQuesttion } from "./slice";
+import { Tabs, Tab } from "react-bootstrap";
 
 export const HomePage = () => {
   const dispatch = useAppDispatch();
   const listQuestion = useAppSelector(getAllQuestion);
   const currentUser = useAppSelector(getCurrentUser);
+  const [key, setKey] = useState<string>("new_question");
 
   const filterQuestion = useMemo(() => {
     let dataAnswered: IQuestions = {};
@@ -31,17 +32,33 @@ export const HomePage = () => {
     } else {
       dataUnanswered = { ...listQuestion };
     }
+    console.log(dataUnanswered, dataAnswered);
     return [dataUnanswered, dataAnswered];
   }, [listQuestion]);
 
+  const handleGetAll = async () => {
+    await dispatch(fetchAllQuesttion());
+  };
+
   useEffect(() => {
-    dispatch(fetchAllQuesttion());
-    dispatch(fetchAllUsers());
+    handleGetAll();
   }, []);
   return (
     <div className="wrapper-content">
-      <ListQuestion title="New Question" questions={filterQuestion[0]} />
-      <ListQuestion title="Done" questions={filterQuestion[1]} />
+      <Tabs
+        activeKey={key}
+        onSelect={(k) => {
+          k && setKey(k);
+        }}
+        className="mb-3"
+      >
+        <Tab eventKey="new_question" title="New Question">
+          <ListQuestion title="New Question" questions={filterQuestion[0]} />
+        </Tab>
+        <Tab eventKey="done" title="Done">
+          <ListQuestion title="Done" questions={filterQuestion[1]} />
+        </Tab>
+      </Tabs>
     </div>
   );
 };
